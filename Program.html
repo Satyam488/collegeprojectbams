@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Learning Portal</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #121212;
+            color: #eee;
+            transition: background 0.3s, color 0.3s;
+        }
+        .light-mode {
+            background: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #1e1e1e;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            transition: background 0.3s;
+        }
+        .light-mode .container {
+            background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        header, footer {
+            background: #242424;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .light-mode header, .light-mode footer {
+            background: #e0e0e0;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        .toggle-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #4fc3f7;
+            color: #1e1e1e;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, color 0.3s;
+            z-index: 1000;
+        }
+        .toggle-button:hover {
+            background: #29b6f6;
+        }
+        .light-mode .toggle-button {
+            background: #333;
+            color: white;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+        .light-mode .section {
+            background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            color: #4fc3f7;
+            cursor: pointer;
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .video-grid, .pdf-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            padding: 10px;
+            justify-content: center;
+        }
+        .card {
+            background: #4fc3f7;
+            color: #1e1e1e;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+        .card:hover {
+            background: #29b6f6;
+        }
+        .light-mode .card {
+            background: #333;
+            color: white;
+        }
+        .video-frame {
+            display: none;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+            .video-grid, .pdf-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script>
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
+        }
+        function showVideo(videoUrl) {
+            var videoFrame = document.getElementById("videoFrame");
+            videoFrame.src = videoUrl;
+            videoFrame.style.display = "block";
+        }
+        function toggleDarkMode() {
+            document.body.classList.toggle('light-mode');
+        }
+    </script>
+</head>
+<body>
+    <header>Student Learning Portal</header>
+    <button class="toggle-button" onclick="toggleDarkMode()">🌗</button>
+    <div class="container">
+        <h1>Welcome to the Learning Portal</h1>
+        <div class="section">
+            <h2 onclick="toggleSection('videoSection')">Video Sessions</h2>
+            <div id="videoSection" class="toggle-content">
+                <div class="video-grid">
+                    <div class="card" onclick="showVideo('https://drive.google.com/file/d/FILE_ID_1/preview')">Video 1</div>
+                    <div class="card" onclick="showVideo('https://drive.google.com/file/d/FILE_ID_2/preview')">Video 2</div>
+                    <div class="card" onclick="showVideo('https://drive.google.com/file/d/FILE_ID_3/preview')">Video 3</div>
+                </div>
+                <iframe id="videoFrame" class="video-frame" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="section">
+            <h2 onclick="toggleSection('pdfSection')">Download PDFs</h2>
+            <div id="pdfSection" class="toggle-content pdf-list">
+                <a class="card" href="pdfs/sample.pdf" download>Session 1 PDF</a>
+                <a class="card" href="pdfs/sample2.pdf" download>Session 2 PDF</a>
+            </div>
+        </div>
+    </div>
+    <footer>© 2025 Student Learning Portal. All rights reserved.</footer>
+</body>
+</html>
